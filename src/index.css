@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #D4AF37;
+  --secondary: #111111;
+  --bg-light: #ffffff;
+  --bg-dark: #f9f9f9;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* Color Palette - Blue & Gold Luxury */
+  --color-primary: #0056b3;
+  /* Derived from Logo Blue */
+  --color-primary-dark: #004494;
+  --color-secondary: #D4AF37;
+  /* Gold */
+  --color-bg: #F0F4F8;
+  /* Very Light Blue/Gray for background */
+  --color-text: #0F172A;
+  /* Slate 900 for text */
+  --color-text-light: #64748B;
+  /* Slate 500 for secondary text */
+  --color-white: #ffffff;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-main);
+}
+
+section {
+  overflow: hidden;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar for hidden scroll areas */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
