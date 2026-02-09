@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
+import logo from '../assets/logo1.png';
 
 const Navbar = () => {
     const { toggleCart, cartItems } = useCart();
@@ -25,7 +26,7 @@ const Navbar = () => {
                     {/* Logo Section */}
                     <Link to="/" className="flex items-center space-x-3 group">
                         <div className="bg-white/10 p-2 rounded-lg backdrop-blur-sm group-hover:bg-white/20 transition-all">
-                            <img src="/src/assets/logo1.png" alt="Pass Gold Logo" className="h-10 w-auto object-contain brightness-0 invert" />
+                            <img src={logo} alt="Pass Gold Logo" className="h-10 w-auto object-contain brightness-0 invert" />
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xl font-serif text-white tracking-wider font-bold leading-none group-hover:text-[#D4AF37] transition-colors">PASS GOLD</span>
