@@ -40,7 +40,7 @@ const PromotionalBanner = () => {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center gap-3 px-10 py-5 bg-[#D4AF37] text-white font-bold text-lg rounded-full shadow-2xl hover:bg-white hover:text-[#0056b3] transition-colors"
+                        className="inline-flex items-center gap-3 px-8 py-4 md:px-10 md:py-5 bg-[#D4AF37] text-white font-bold text-lg rounded-full shadow-2xl hover:bg-white hover:text-[#0056b3] transition-colors"
                     >
                         Start Your Project
                         <ArrowRight size={24} />

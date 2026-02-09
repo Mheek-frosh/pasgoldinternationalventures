@@ -11,7 +11,7 @@ const Footer = () => {
                     <div>
                         <div className="flex items-center space-x-3 mb-6">
                             <div className="bg-white/10 p-2 rounded-lg">
-                                <img src="/src/assets/LOGO.png" alt="Pass Gold Logo" className="h-10 w-auto brightness-0 invert" />
+                                <img src="/src/assets/logo1.png" alt="Pass Gold Logo" className="h-10 w-auto brightness-0 invert" />
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-xl font-serif text-white tracking-wider font-bold leading-none">PASS GOLD</span>

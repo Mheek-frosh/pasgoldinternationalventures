@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Minus, Plus, ShoppingCart, Check } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 const marbles = [
     {
@@ -66,6 +67,7 @@ const marbles = [
 ];
 
 const ProductGrid = () => {
+    const { addToCart } = useCart();
     const [selectedMarble, setSelectedMarble] = useState(null);
     const [quantity, setQuantity] = useState(1);
 
@@ -81,11 +83,10 @@ const ProductGrid = () => {
     const incrementQuantity = () => setQuantity(q => q + 1);
     const decrementQuantity = () => setQuantity(q => Math.max(1, q - 1));
 
-    const addToCart = () => {
+    const handleAddToCart = () => {
         if (!selectedMarble) return;
-        const message = `Hello Pass Gold, I am interested in *${selectedMarble.name}*.\n\nQuantity: ${quantity} sqm\nPrice: ${selectedMarble.price}\n\nPlease provide a formal quote.`;
-        const url = `https://wa.me/2347054885172?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
+        addToCart(selectedMarble, quantity);
+        closeModal();
     };
 
     return (
@@ -220,11 +221,11 @@ const ProductGrid = () => {
                                     </div>
 
                                     <button
-                                        onClick={addToCart}
+                                        onClick={handleAddToCart}
                                         className="w-full py-4 bg-[#D4AF37] text-white font-bold rounded-xl hover:bg-black transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
                                     >
                                         <ShoppingCart size={20} className="group-hover:scale-110 transition-transform" />
-                                        Request Quote / Add to Cart
+                                        Add to Cart
                                     </button>
                                     <p className="text-center text-gray-400 text-xs mt-3">
                                         *Checkout redirects to WhatsApp for secure processing

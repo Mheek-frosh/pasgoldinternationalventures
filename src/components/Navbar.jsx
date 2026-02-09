@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
+    const { toggleCart, cartItems } = useCart();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -11,7 +13,7 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'Products', path: '#products' },
-        { name: 'Projects', path: '#projects' },
+        { name: 'Projects', path: '/projects' },
         { name: 'Testimonials', path: '#testimonials' },
         { name: 'Contact', path: '#contact' },
     ];
@@ -23,13 +25,14 @@ const Navbar = () => {
                     {/* Logo Section */}
                     <Link to="/" className="flex items-center space-x-3 group">
                         <div className="bg-white/10 p-2 rounded-lg backdrop-blur-sm group-hover:bg-white/20 transition-all">
-                            <img src="/src/assets/LOGO.png" alt="Pass Gold Logo" className="h-10 w-auto object-contain brightness-0 invert" />
+                            <img src="/src/assets/logo1.png" alt="Pass Gold Logo" className="h-10 w-auto object-contain brightness-0 invert" />
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xl font-serif text-white tracking-wider font-bold leading-none group-hover:text-[#D4AF37] transition-colors">PASS GOLD</span>
                             <span className="text-[10px] text-white/70 uppercase tracking-[0.2em] leading-none mt-1 group-hover:text-white transition-colors">International Ventures</span>
                         </div>
                     </Link>
+
                     {/* Desktop Navigation */}
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-8">
@@ -45,8 +48,35 @@ const Navbar = () => {
                             ))}
                         </div>
                     </div>
-                    {/* Mobile Menu Button */}
-                    <div className="-mr-2 flex md:hidden">
+
+                    {/* Desktop Cart Icon */}
+                    <div className="hidden md:block ml-8">
+                        <button
+                            onClick={toggleCart}
+                            className="relative p-2 text-white hover:text-[#D4AF37] transition-all group"
+                        >
+                            <ShoppingCart size={24} className="group-hover:scale-110 transition-transform" />
+                            {cartItems.length > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-[#D4AF37] text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center animate-bounce">
+                                    {cartItems.length}
+                                </span>
+                            )}
+                        </button>
+                    </div>
+
+                    {/* Mobile Menu & Cart */}
+                    <div className="flex md:hidden items-center gap-4">
+                        <button
+                            onClick={toggleCart}
+                            className="relative p-1 text-white hover:text-[#D4AF37]"
+                        >
+                            <ShoppingCart size={24} />
+                            {cartItems.length > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-[#D4AF37] text-black text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                    {cartItems.length}
+                                </span>
+                            )}
+                        </button>
                         <button
                             onClick={toggleMenu}
                             className="inline-flex items-center justify-center p-2 rounded-md text-[#D4AF37] hover:text-white hover:bg-gray-800 focus:outline-none"

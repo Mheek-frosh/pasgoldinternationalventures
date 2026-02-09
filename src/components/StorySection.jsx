@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
+import { Play, Pause } from 'lucide-react';
 
 const StorySection = () => {
+    const videoRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const togglePlay = () => {
+        if (videoRef.current) {
+            if (isPlaying) {
+                videoRef.current.pause();
+            } else {
+                videoRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
+
     return (
         <section className="py-24 bg-white relative overflow-hidden">
             {/* Background Pattern */}
@@ -20,7 +34,7 @@ const StorySection = () => {
                         className="lg:w-1/2"
                     >
                         <span className="text-[#D4AF37] font-medium tracking-[0.2em] uppercase text-sm block mb-4">
-                            Installation Proces
+                            Installation Process
                         </span>
                         <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6 leading-tight">
                             Watch Our Story <br /> in Action
@@ -49,7 +63,7 @@ const StorySection = () => {
                         </div>
                     </motion.div>
 
-                    {/* Image/Video Container Side with Rounded Corners */}
+                    {/* Video Container Side */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -57,25 +71,34 @@ const StorySection = () => {
                         transition={{ duration: 0.8 }}
                         className="lg:w-1/2 relative"
                     >
-                        {/* Main Container with Border Radius */}
-                        <div className="relative rounded-[50px] overflow-hidden shadow-2xl border-8 border-white">
-                            <img
-                                src="https://images.unsplash.com/photo-1620626012053-1c14e0bd3dfc?q=80&w=2000&auto=format&fit=crop"
-                                alt="Marble Installation Finished"
-                                className="w-full h-[500px] object-cover"
-                            />
+                        <div className="relative rounded-[50px] overflow-hidden shadow-2xl border-8 border-white group">
+                            <video
+                                ref={videoRef}
+                                className="w-full h-[300px] md:h-[500px] object-cover"
+                                poster="https://images.unsplash.com/photo-1620626012053-1c14e0bd3dfc?q=80&w=2000&auto=format&fit=crop"
+                                onEnded={() => setIsPlaying(false)}
+                            >
+                                <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=164&oauth2_token_id=57447761" type="video/mp4" />
+                            </video>
 
-                            {/* Overlay with Play Button (Simulating Video) */}
-                            <div className="absolute inset-0 bg-black/30 flex items-center justify-center group cursor-pointer hover:bg-black/40 transition-all">
-                                <motion.div
+                            {/* Overlay Controls */}
+                            <div
+                                className={`absolute inset-0 bg-black/30 flex items-center justify-center transition-all duration-300 ${isPlaying ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}
+                            >
+                                <motion.button
+                                    onClick={togglePlay}
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
-                                    className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50"
+                                    className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 cursor-pointer"
                                 >
                                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg">
-                                        <Play className="ml-1 text-[#D4AF37] fill-[#D4AF37]" size={32} />
+                                        {isPlaying ? (
+                                            <Pause className="text-[#D4AF37] fill-[#D4AF37]" size={32} />
+                                        ) : (
+                                            <Play className="ml-1 text-[#D4AF37] fill-[#D4AF37]" size={32} />
+                                        )}
                                     </div>
-                                </motion.div>
+                                </motion.button>
                             </div>
                         </div>
 
